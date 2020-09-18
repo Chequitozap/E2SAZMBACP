@@ -1,17 +1,75 @@
-import requests
-import os
-import sys
-from bs4 import BeautifulSoup as bs
-import webbrowser
+try: 
+    import requests 
 
-print("Este script navega en las p�ginas de noticas de la UANL")
+except ImportError: 
+
+    os.system('pip install requests') 
+
+    print('Installing requests...') 
+
+    print('Ejecuta de nuevo tu script...') 
+
+    exit()
+    
+try: 
+
+    import os 
+
+except ImportError: 
+
+    os.system('pip install os') 
+
+    print('Installing os...') 
+
+    print('Ejecuta de nuevo tu script...') 
+
+    exit()
+    
+try: 
+
+    import sys
+
+except ImportError: 
+
+    os.system('pip install sys') 
+
+    print('Installing sys...') 
+
+    print('Ejecuta de nuevo tu script...') 
+
+    exit() 
+
+from bs4 import BeautifulSoup as bs
+
+
+try: 
+
+    import webbrowser 
+
+except ImportError: 
+
+    os.system('pip install webbrowser') 
+
+    print('Installing webbrowser...') 
+
+    print('Ejecuta de nuevo tu script...') 
+
+    exit() 
+#Bárbara Azalia Cantú Peña
+#Sergio Armando Zapata Martinez 
+#El siguiente script investiga en el portal de la UNI las noticias de la facultad que tu ingreses en un rango de paginas que tu desees.
+#Si la facultad que ingreses no existe o no tiene informacion te regresara pagina no encontrada
+#Al encontrar la informacion de la facultad webbrowser.open abre las paginas encontradas
+    
+
+print("Este script navega en las páginas de noticas de la UANL")
 inicioRango = int(input("Pagina inicial para buscar: "))
 finRango = int(input("Pagina final para buscar: "))
 dependencia = input("Ingrese las siglas de la Facultad a buscar: ")
 if inicioRango > finRango:
     inicioRango,finRango = finRango,inicioRango
 for i in range (inicioRango,finRango,1):
-    url = "https://www.uanl.mx/noticias/page/"+str(i)
+    url = "https://www.uanl.mx/noticias/page/"+str(i)#Busca en todas las paginas que tengan esa nomenclatura
     pagina = requests.get (url)
     if pagina.status_code != 200:
         raise TypeError("Pagina no encontrada")
@@ -30,5 +88,3 @@ for i in range (inicioRango,finRango,1):
                         webbrowser.open(url2)
                         break
     
-
-
